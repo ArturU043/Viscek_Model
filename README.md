@@ -9,7 +9,7 @@ Il y a 2 paramètres importants dans ce modèle :
 - **Le bruit angulaire** il s'agit d'une incertitude sur l'angle de que va prendre une particule à chaque Dt. Ceci est du qu fait que l'on parle de matière active donc hors équilibre et ayant une volonté propre. 
 
 
-
+Avec l'évolution du bruit nous observons une transition de phase , de la phase ordonée à désordonée. 
 
 
 
