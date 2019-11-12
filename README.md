@@ -30,8 +30,8 @@ C'est le premier thème que nous allons aborder.
 
 
 #### Liens :
-- https://journals.aps.org/prl/pdf/10.1103/PhysRevLett.75.1226  (article original à reproduire)
-- https://en.wikipedia.org/wiki/Vicsek_model
+- https://journals.aps.org/prl/pdf/10.1103/PhysRevLett.75.1226  (article original à reproduire) **à lire**
+- https://en.wikipedia.org/wiki/Vicsek_model **à lire**
 - http://web.mit.edu/8.334/www/grades/projects/projects10/Hernandez-Lopez-Rogelio/dynamics_2.html  (interprétation différente du bruit)
 - https://www.nature.com/news/the-physics-of-life-1.19105  (vulgarisation Nature) 
 
