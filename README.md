@@ -10,6 +10,7 @@ Il y a 2 paramètres importants dans ce modèle :
 
 
 Avec l'évolution du bruit nous observons une transition de phase , de la phase ordonée à désordonée. 
+C'est le premier thème que nous allons aborder.
 
 
 
