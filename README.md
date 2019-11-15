@@ -34,7 +34,7 @@ C'est le premier thème que nous allons aborder.
 - https://en.wikipedia.org/wiki/Vicsek_model **à lire**
 - http://web.mit.edu/8.334/www/grades/projects/projects10/Hernandez-Lopez-Rogelio/dynamics_2.html  (interprétation différente du bruit)
 - https://www.nature.com/news/the-physics-of-life-1.19105  (vulgarisation Nature) 
-- http://web.mit.edu/8.334/www/grades/projects/projects10/Hernandez-Lopez-Rogelio/dynamics_2.html (un mec du MIT qui a fait un site internet avec tout ce qu'il nous faut dessus)
+
 
 
 
