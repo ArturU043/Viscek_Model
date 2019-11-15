@@ -1,7 +1,7 @@
 module var
   implicit none
 
-  integer :: a,b, n, L
+  integer :: a, b, n, L
   real, dimension (2,n) :: r, v, theta
   real :: m, dt
 
@@ -28,14 +28,10 @@ program Viscek
   write (*,*) "Entrez la norme de la vitesse des particules :"
   read (*,*) vnorme
 
-!Initialisation des coposantes des positions et des vitesses:
-
-il y a un probleme dans le theta:
-
+  ! Initialisation des coposantes des positions et des vitesses:
   do a = 1, n
     r(a,b) = L*rand()
     bla = rand()
-    theta =
     v(a,b) = vnorme*bla
     do b = 1, 2
       r(a,b) = L*rand()
@@ -55,6 +51,9 @@ subroutine positions
 
   integer :: i
 
+ ! Calcul des vraies composantes de theta avec le paramêtre de controle
+
+ ! Calcul des positions au cours du temps:
   do i = 1, m
     do a=1, n
       r(a,b) =
