@@ -1,9 +1,10 @@
 module var
   implicit none
 
-  integer :: a, b, n, L
-  real, dimension (2,n) :: r, v, theta
-  real :: m, dt
+  integer :: a, b, L=5
+  integer , parameter :: N = 300
+  real, dimension (2,N) :: r, v
+  real :: m, dt, vnorme=0.03 , bruit = 0.1
 
 end module var
 
@@ -17,29 +18,29 @@ program Viscek
   implicit none
   use var
 
-  real :: bla
+  real ::o
 
-  write (*,*) "Entrez un nombre entier de particules que vous voulez modéliser :"
-  read (*,*) n
-  write (*,*) "Entrez le nombre entier d'étapes (la durée totale qui sera discrétisée):"
-  read (*,*) m
-  write (*,*) "Entrez le pas de discrétisation du temps :"
-  read (*,*) dt
-  write (*,*) "Entrez la norme de la vitesse des particules :"
-  read (*,*) vnorme
+  !write (*,*) "Entrez un nombre entier de particules que vous voulez modéliser :"
+  !read (*,*) N
+  !write (*,*) "Entrez le nombre entier d'étapes (la durée totale qui sera discrétisée):"
+  !read (*,*) m
+  !write (*,*) "Entrez le pas de discrétisation du temps :"
+  !read (*,*) dt
+  !write (*,*) "Entrez la norme de la vitesse des particules :"
+  !read (*,*) vnorme
 
   ! Initialisation des coposantes des positions et des vitesses:
-  do a = 1, n
+  do b = 1, N
     r(a,b) = L*rand()
-    bla = rand()
-    v(a,b) = vnorme*bla
-    do b = 1, 2
-      r(a,b) = L*rand()
-      v(a,b) = v*(1-bla)
+    o = rand()
+   
+    do a = 1, 2
+       r(a,b) = L*rand()
+       v(a,b) = vnorme*(1-o)
     end do
   end do
 
-  call subroutine positions
+ ! call subroutine positions
 
 end program Viscek
 
