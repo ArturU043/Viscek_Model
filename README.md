@@ -1,5 +1,7 @@
 # Viscek Model
 
+Rapport entre 12 / 25 pages , intro , résultats ,  1 sem après dernier , impérativement vendredi , environ 15 min ttc
+
 ## Description
 
 Le modèle de Viscek permet d'exprimer mathématiquement ,en utilisant des règles dynamiques élementaires ,l'évolution du déplacement d'un groupe de particules auto-propulsées. Cela permet d'étudier le comportement d'un ensemble de matière active comme une nuée d'oiseaux où un banc de poissons par exemple.
