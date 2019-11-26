@@ -1,5 +1,12 @@
 # Viscek Model
 
+A faire : 
+- calculer terme d'ordre non pas sur la derniere étape mais sur le tout 
+- utiliser photos pour ploter 
+- recalculer distance boite L/2
+- tracer terme d'ordre en fct de eta (0 . 5)
+
+
 Rapport entre 12 / 25 pages , intro , résultats ,  1 sem après dernier , impérativement vendredi , environ 15 min ttc
 
 ## Description
