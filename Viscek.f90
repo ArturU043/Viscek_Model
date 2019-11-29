@@ -109,7 +109,6 @@ subroutine evolution (r,theta,theta_n)
 end subroutine evolution
 
 
-
 subroutine distance (x1,y1,x2,y2,d)
   use var
   implicit none
@@ -118,48 +117,19 @@ subroutine distance (x1,y1,x2,y2,d)
   real :: x ,y                           ! Norme des composantes de la distance entre 2 particules
   real , intent(out):: d
 
-  if (x1/=0) then                         !on met les particules dans la boîte (entre 0 et L) afin de calculer les distances
-    x1=-x1 +anint(x1/L)*L             ! mirroir - le nombre entier de L (ex: x1 = -3/2L -> x_n = -3/2L - L = 1/2L)
-  endif
-  if (x1>L) then
-    x1=x1-anint(x1/L)*L
-  endif
-
-  if (x2<0) then
-    x2=-x2+anint(x2/L)*L
-  endif
-  if (x2>L) then
-    x2=x2-anint(x2/L)*L
-  endif
-
-  if (y1<0) then
-    y1=-y+anint(y1/L)*L
-  endif
-  if (y1>L) then
-    y1=y1-anint(y1/L)*L
-  endif
-
-  if (y2<0) then
-    y2=-y2+anint(y2/L)*L
-  endif
-  if (y2>L) then
-    y2 = y2-anint(y2/L)*L
-  endif
-
-
-  x=(x1 - x2)
-  y=(y1 - y2)
+  x=abs (x1 - x2)
+  y=abs (y1 - y2)
 
   if (x>0.5*L) then
-    x=L-max(x1,x2)+min(x1,x2)
+    x = x - anint(x/L)
   endif
-
   if (y>0.5*L) then
-    y=L-max(y1,y2)+min(y1,y2)
+    y= y - anint(y/L)
   endif
-
   d=sqrt(x**2+y**2)
 endsubroutine distance
+
+
 
 
 
@@ -174,6 +144,15 @@ subroutine deplacement (theta_n,r,r_n,v_n)
     v_n(i,1)=vnorme*cos(theta_n(i))
     v_n(i,2)=vnorme*sin(theta_n(i))
     r_n(i,1)=r(i,1)+v_n(i,1)*dt
-    r_n(i,2)=r(i,2)+v_n(i,2)*dt
+   
+    if (r_n(i,1)>L) then
+      r_n(i,1) = r_n(i,1) - L
+    endif
+   
+   r_n(i,2)=r(i,2)+v_n(i,2)*dt
+   
+   if (r_n(i,2)> L) then
+    r_n(i,2) = r_n(i,2) - L
+   endif
   end do
 endsubroutine deplacement
