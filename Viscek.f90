@@ -121,10 +121,10 @@ subroutine distance (x1,y1,x2,y2,d)
   y=abs (y1 - y2)
 
   if (x>0.5*L) then
-    x = x - anint(x/L)
+    x = x - anint(x/L)*L
   endif
   if (y>0.5*L) then
-    y= y - anint(y/L)
+    y= y - anint(y/L)*L
   endif
   d=sqrt(x**2+y**2)
 endsubroutine distance
@@ -144,15 +144,20 @@ subroutine deplacement (theta_n,r,r_n,v_n)
     v_n(i,1)=vnorme*cos(theta_n(i))
     v_n(i,2)=vnorme*sin(theta_n(i))
     r_n(i,1)=r(i,1)+v_n(i,1)*dt
+     r_n(i,2)=r(i,2)+v_n(i,2)*dt
    
-    if (r_n(i,1)>L) then
+    if (r_n(i,1)>L) then                              ! Si on depasse le cõté gauche de la boite (L) on revient à droite
       r_n(i,1) = r_n(i,1) - L
     endif
-   
-   r_n(i,2)=r(i,2)+v_n(i,2)*dt
+    if (r_n(i,1)<0) then                              ! Si on depasse le cõté droit de la boite (0) on revient à gauche
+      r_n(i,1) = r_n(i,1) + L
+    endif
    
    if (r_n(i,2)> L) then
     r_n(i,2) = r_n(i,2) - L
+   endif
+   if (r_n(i,2)<0) then                              ! Si on depasse le cõté droit de la boite (0) on revient à gauche
+      r_n(i,1) = r_n(i,2) + L
    endif
   end do
 endsubroutine deplacement
