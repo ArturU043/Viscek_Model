@@ -1,9 +1,9 @@
 module var
   implicit none
 
-  integer :: i, k,j, a, b, L=5
+  integer :: i, k,j, a, b, L=7
   integer , parameter :: N = 300
-  real :: m, vnorme=0.03 , eta=0.0 ,dt=1.0
+  real :: m, vnorme=0.03 , eta=5 ,dt=1.0
 
 end module var
 
@@ -19,40 +19,38 @@ program Viscek
 
   real ,dimension (N, 2) :: r , v , r_n , v_n
   real ,dimension (N) :: theta , theta_n
-  real :: v_ordre_x = 0.0 , v_ordre_y = 0.0 , v_ordre
+  real :: v_ordre_x , v_ordre_y , v_ordre
 
-  open (12,file='/Users/tim/Documents/Etudes/Physnum/Viscek_Model/data/eta_v_ordre.dat')
+  open (12,file='data/eta_v_ordre.dat')
 
 
-  do k=1, 100
-    do b=1, 100
-      call init(r,v,theta)
-      do a=1, 100                          ! nombre de pas de temps dt
-        call evolution(r,theta,theta_n)       ! influence des voisins sur l'angle
-        call deplacement(theta_n,r,r_n,v_n)
-        r=r_n ; v=v_n ; theta=theta_n
-        do i=1, N
-          write(11,*) r(i,1), r(i,2) ,v(i,1), v(i,2)
-        end do
-        write(11,*)
-        write(11,*)
+!  do k=1, 100
+    v_ordre=0.0
+    v_ordre_x=0.0
+    v_ordre_y=0.0
+    call init(r,v,theta)
+    do a=1, 100                          ! nombre de pas de temps dt
+      call evolution(r,theta,theta_n)       ! influence des voisins sur l'angle
+      call deplacement(theta_n,r,r_n,v_n)
+      r=r_n ; v=v_n ; theta=theta_n
+      do i=1, N
+        write(11,*) r(i,1), r(i,2) ,v(i,1), v(i,2)
       end do
-
-      do j=1, N
-        v_ordre_x = v_ordre_x + v(j,1)
-        v_ordre_y = v_ordre_y + v(j,2)
-
-        v_ordre_x = v_ordre_x /(N*vnorme)
-        v_ordre_y = v_ordre_y /(N*vnorme)
-
-        v_ordre= sqrt(v_ordre_x**2+v_ordre_y**2)
-        write(12,*) eta , v_ordre
-      end do
-      write(12,*)
-      write(12,*)
-      eta=eta+0.05
+      write(11,*)
+      write(11,*)
     end do
-  end do
+
+!    do j=1, N
+!      v_ordre_x = v_ordre_x + v(j,1)
+!      v_ordre_y = v_ordre_y + v(j,2)
+!
+!      v_ordre_x = v_ordre_x /(N*vnorme)
+!      v_ordre_y = v_ordre_y /(N*vnorme)
+
+!      v_ordre= sqrt(v_ordre_x**2+v_ordre_y**2)
+
+!    end do
+!  end do
 endprogram Viscek
 
 
@@ -64,7 +62,7 @@ subroutine init(r,v,theta)
   real ,dimension (N,2), intent(inout) :: r, v
   real ,dimension (N), intent (inout):: theta
 
-  open (11,file='/Users/tim/Documents/Etudes/Physnum/Viscek_Model/data/pos_v.dat')
+  open (11,file='data/pos_v.dat')
   ! Initialisation des coposantes des positions et des vitesses 1:x 2:y
   do b=1, N
     r(b,1) = L*rand()
@@ -144,15 +142,15 @@ subroutine deplacement (theta_n,r,r_n,v_n)
     v_n(i,1)=vnorme*cos(theta_n(i))
     v_n(i,2)=vnorme*sin(theta_n(i))
     r_n(i,1)=r(i,1)+v_n(i,1)*dt
-     r_n(i,2)=r(i,2)+v_n(i,2)*dt
-   
+    r_n(i,2)=r(i,2)+v_n(i,2)*dt
+
     if (r_n(i,1)>L) then                              ! Si on depasse le cõté gauche de la boite (L) on revient à droite
       r_n(i,1) = r_n(i,1) - L
     endif
     if (r_n(i,1)<0) then                              ! Si on depasse le cõté droit de la boite (0) on revient à gauche
       r_n(i,1) = r_n(i,1) + L
     endif
-   
+
    if (r_n(i,2)> L) then
     r_n(i,2) = r_n(i,2) - L
    endif
