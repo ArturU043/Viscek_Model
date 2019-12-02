@@ -3,7 +3,7 @@ module var
 
   integer :: i, k,j, a, b, L=7
   integer , parameter :: N = 300
-  real :: m, vnorme=0.03 , eta=5 ,dt=1.0
+  real :: m, vnorme=0.03 , eta=0.00 ,dt=1.0
 
 end module var
 
@@ -24,7 +24,7 @@ program Viscek
   open (12,file='data/eta_v_ordre.dat')
 
 
-!  do k=1, 100
+  do k=1, 1000
     v_ordre=0.0
     v_ordre_x=0.0
     v_ordre_y=0.0
@@ -34,23 +34,19 @@ program Viscek
       call deplacement(theta_n,r,r_n,v_n)
       r=r_n ; v=v_n ; theta=theta_n
       do i=1, N
-        write(11,*) r(i,1), r(i,2) ,v(i,1), v(i,2)
+        write(11,*) r(i,1), r(i,2) ,v(i,1), v(i,2), eta
+        v_ordre_x = v_ordre_x + v(i,1)
+        v_ordre_y = v_ordre_y + v(i,2)
       end do
       write(11,*)
       write(11,*)
     end do
-
-!    do j=1, N
-!      v_ordre_x = v_ordre_x + v(j,1)
-!      v_ordre_y = v_ordre_y + v(j,2)
-!
-!      v_ordre_x = v_ordre_x /(N*vnorme)
-!      v_ordre_y = v_ordre_y /(N*vnorme)
-
-!      v_ordre= sqrt(v_ordre_x**2+v_ordre_y**2)
-
-!    end do
-!  end do
+    v_ordre_x = v_ordre_x /(N*a*vnorme)
+    v_ordre_y = v_ordre_y /(N*a*vnorme)
+    v_ordre= sqrt(v_ordre_x**2+v_ordre_y**2)
+    write(12,*) eta, v_ordre
+    eta = eta + 0.05
+   end do
 endprogram Viscek
 
 
