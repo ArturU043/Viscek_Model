@@ -2,8 +2,8 @@ module var
   implicit none
 
   integer :: i, k,j, a, b, L=25
-  integer , parameter :: N = 300
-  real :: vnorme=0.03 , eta=0.1 ,dt=1.0
+  integer , parameter :: N = 1000
+  real :: vnorme=0.03 , eta=2.5 ,dt=1.0
 
 end module var
 
