@@ -3,7 +3,7 @@ module var
 
   integer :: i, k,j, a, b, L=25
   integer , parameter :: N = 1000
-  real :: vnorme=0.03 , eta=2.5 ,dt=1.0
+  real :: vnorme=0.03 , eta=0.0 ,dt=1.0
 
 end module var
 
@@ -24,7 +24,7 @@ program Viscek
   open (12,file='data/eta_v_ordre.dat')
 
 
-  !do k=1, 1000
+  do k=1, 500
     v_ordre=0.0
     v_ordre_x=0.0
     v_ordre_y=0.0
@@ -45,9 +45,8 @@ program Viscek
     v_ordre_y = abs(v_ordre_y /(N*100*vnorme))
     v_ordre= sqrt(v_ordre_x**2+v_ordre_y**2)
     write(12,*) eta, v_ordre
-    write(*,*) v_ordre, v_ordre_x, v_ordre_y
-!    eta = eta + 0.05
-!   end do
+    eta = eta + 0.01
+  end do
 endprogram Viscek
 
 
