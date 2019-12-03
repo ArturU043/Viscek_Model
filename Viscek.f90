@@ -3,7 +3,7 @@ module var
 
   integer :: i, k,j, a, b, L=7
   integer , parameter :: N = 300
-  real :: m, vnorme=0.03 , eta=0.00 ,dt=1.0
+  real :: vnorme=0.03 , eta=2.00 ,dt=1.0
 
 end module var
 
@@ -24,7 +24,7 @@ program Viscek
   open (12,file='data/eta_v_ordre.dat')
 
 
-  do k=1, 1000
+  !do k=1, 1000
     v_ordre=0.0
     v_ordre_x=0.0
     v_ordre_y=0.0
@@ -34,19 +34,20 @@ program Viscek
       call deplacement(theta_n,r,r_n,v_n)
       r=r_n ; v=v_n ; theta=theta_n
       do i=1, N
-        write(11,*) r(i,1), r(i,2) ,v(i,1), v(i,2), eta
+        write(11,*) r(i,1), r(i,2) ,v(i,1), v(i,2)
         v_ordre_x = v_ordre_x + v(i,1)
         v_ordre_y = v_ordre_y + v(i,2)
       end do
       write(11,*)
       write(11,*)
     end do
-    v_ordre_x = v_ordre_x /(N*a*vnorme)
-    v_ordre_y = v_ordre_y /(N*a*vnorme)
+    v_ordre_x = abs(v_ordre_x /(N*100*vnorme))
+    v_ordre_y = abs(v_ordre_y /(N*100*vnorme))
     v_ordre= sqrt(v_ordre_x**2+v_ordre_y**2)
     write(12,*) eta, v_ordre
-    eta = eta + 0.05
-   end do
+    write(*,*) v_ordre, v_ordre_x, v_ordre_y
+!    eta = eta + 0.05
+!   end do
 endprogram Viscek
 
 
@@ -97,7 +98,7 @@ subroutine evolution (r,theta,theta_n)
       endif                                            ! somme des thetas voisins
     enddo
     thet_av=(thet_v+theta(i))/(n_v+1)                  ! moyenne des thetas en incluant la particule i
-    D_thet= (eta/2) * (2*rand()-1)
+    D_thet= (eta/2)*(2*rand()-1)
     theta_n(i)=thet_av+D_thet
   enddo
 end subroutine evolution
